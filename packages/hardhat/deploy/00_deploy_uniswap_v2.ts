@@ -16,8 +16,8 @@ const deployUniswapV2: DeployFunction = async function (hre: HardhatRuntimeEnvir
 
   // Known WETH addresses for different networks
   const WETH_ADDRESSES: { [key: string]: string } = {
-    // Passet Hub (Custom network) - will deploy mock WETH
-    "420420421": "0x0000000000000000000000000000000000000000",
+    // Flare Testnet (Custom network) - will deploy mock WETH
+    "114": "0x0000000000000000000000000000000000000000",
   };
 
   const chainId = await hre.getChainId();

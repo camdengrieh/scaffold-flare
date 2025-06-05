@@ -41,7 +41,7 @@ const config: HardhatUserConfig = {
       accounts: [deployerPrivateKey],
     },
     "flare-mainnet": {
-      url: `https://flare-mainnet.g.alchemy.com/v2/demo`,
+      url: `https://flare-api.flare.network/ext/C/rpc`,
       accounts: [deployerPrivateKey],
     },
   },
@@ -57,6 +57,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://coston2.testnet.flarescan.com", //Fetch Api
           browserURL: "https://coston2.testnet.flarescan.com",
+        },
+      },
+      {
+        network: "flare-mainnet",
+        chainId: 14,
+        urls: {
+          apiURL: "https://api.flarescan.com",
+          browserURL: "https://flarescan.com",
         },
       },
     ],
