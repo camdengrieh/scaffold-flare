@@ -1,5 +1,6 @@
 import { DebugContracts } from "./_components/DebugContracts";
 import type { NextPage } from "next";
+import { USDCFaucet } from "~~/components/scaffold-eth";
 import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
 
 export const metadata = getMetadata({
@@ -20,6 +21,15 @@ const Debug: NextPage = () => {
             packages / nextjs / app / debug / page.tsx
           </code>{" "}
         </p>
+      </div>
+
+      {/* USDC Faucet Section */}
+      <div className="text-center mt-8 bg-base-200 p-8 rounded-xl max-w-md mx-auto">
+        <h2 className="text-2xl font-bold mb-4 text-base-content">🚰 USDC Test Faucet</h2>
+        <p className="text-base-content/70 mb-6 text-sm">
+          Get test USDC tokens to interact with the weather insurance platform
+        </p>
+        <USDCFaucet />
       </div>
     </>
   );
