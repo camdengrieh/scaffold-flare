@@ -2,6 +2,7 @@
 pragma solidity ^0.8.25;
 
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {IWeb2Json} from "@flarenetwork/flare-periphery-contracts/coston2/IWeb2Json.sol";
 import {ContractRegistry} from "@flarenetwork/flare-periphery-contracts/coston2/ContractRegistry.sol";
 
@@ -37,6 +38,7 @@ contract WeatherIdAgency {
         uint256 id;
     }
 
+    IERC20 public immutable usdcToken;
     Policy[] public registeredPolicies;
     mapping(uint256 => address) public insurers;
 
@@ -46,18 +48,29 @@ contract WeatherIdAgency {
     event PolicyExpired(uint256 id);
     event PolicyRetired(uint256 id);
 
+    constructor(address _usdcToken) {
+        usdcToken = IERC20(_usdcToken);
+    }
+
     function createPolicy(
         int256 latitude,
         int256 longitude,
         uint256 startTimestamp,
         uint256 expirationTimestamp,
         uint256 weatherIdThreshold,
+        uint256 premium,
         uint256 coverage
-    ) public payable {
-        require(msg.value > 0, "No premium paid");
+    ) public {
+        require(premium > 0, "No premium paid");
         require(
             startTimestamp < expirationTimestamp,
             "Value of startTimestamp larger than expirationTimestamp"
+        );
+
+        // Transfer premium from user to contract
+        require(
+            usdcToken.transferFrom(msg.sender, address(this), premium),
+            "Premium transfer failed"
         );
 
         Policy memory newPolicy = Policy({
@@ -67,7 +80,7 @@ contract WeatherIdAgency {
             startTimestamp: startTimestamp,
             expirationTimestamp: expirationTimestamp,
             weatherIdThreshold: weatherIdThreshold,
-            premium: msg.value,
+            premium: premium,
             coverage: coverage,
             status: PolicyStatus.Unclaimed,
             id: registeredPolicies.length
@@ -78,7 +91,7 @@ contract WeatherIdAgency {
         emit PolicyCreated(newPolicy.id);
     }
 
-    function claimPolicy(uint256 id) public payable {
+    function claimPolicy(uint256 id) public {
         Policy memory policy = registeredPolicies[id];
         require(
             policy.status == PolicyStatus.Unclaimed,
@@ -87,13 +100,22 @@ contract WeatherIdAgency {
         if (block.timestamp > policy.startTimestamp) {
             retireUnclaimedPolicy(id);
         }
-        require(msg.value >= policy.coverage, "Insufficient coverage paid");
+        
+        // Transfer coverage from insurer to contract
+        require(
+            usdcToken.transferFrom(msg.sender, address(this), policy.coverage),
+            "Coverage transfer failed"
+        );
 
         policy.status = PolicyStatus.Open;
         registeredPolicies[id] = policy;
         insurers[id] = msg.sender;
 
-        payable(msg.sender).transfer(policy.premium);
+        // Transfer premium to insurer
+        require(
+            usdcToken.transfer(msg.sender, policy.premium),
+            "Premium transfer to insurer failed"
+        );
 
         emit PolicyClaimed(id);
     }
@@ -149,7 +171,13 @@ contract WeatherIdAgency {
 
         policy.status = PolicyStatus.Settled;
         registeredPolicies[id] = policy;
-        payable(policy.holder).transfer(policy.coverage);
+        
+        // Transfer coverage to policy holder
+        require(
+            usdcToken.transfer(policy.holder, policy.coverage),
+            "Coverage transfer to holder failed"
+        );
+        
         emit PolicySettled(id);
     }
 
@@ -162,7 +190,13 @@ contract WeatherIdAgency {
         );
         policy.status = PolicyStatus.Settled;
         registeredPolicies[id] = policy;
-        payable(insurers[id]).transfer(policy.coverage);
+        
+        // Return coverage to insurer
+        require(
+            usdcToken.transfer(insurers[id], policy.coverage),
+            "Coverage return to insurer failed"
+        );
+        
         emit PolicyExpired(id);
     }
 
@@ -178,7 +212,12 @@ contract WeatherIdAgency {
         );
         policy.status = PolicyStatus.Settled;
         registeredPolicies[id] = policy;
-        payable(policy.holder).transfer(policy.premium);
+        
+        // Return premium to policy holder
+        require(
+            usdcToken.transfer(policy.holder, policy.premium),
+            "Premium return failed"
+        );
 
         emit PolicyRetired(id);
     }

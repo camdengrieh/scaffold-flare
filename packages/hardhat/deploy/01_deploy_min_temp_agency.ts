@@ -1,5 +1,6 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
+import { Contract } from "ethers";
 
 /**
  * Deploys MinTempAgency contract for temperature-based weather insurance
@@ -17,11 +18,18 @@ const deployMinTempAgency: DeployFunction = async function (hre: HardhatRuntimeE
   console.log(`Network: ${hre.network.name} (Chain ID: ${chainId})`);
   console.log(`Deployer: ${deployer}\n`);
 
+  // Get the deployed USDC token contract
+  const usdcToken = await hre.ethers.getContract<Contract>("USDCToken", deployer);
+  const usdcTokenAddress = await usdcToken.getAddress();
+
+  console.log("Deploying MinTempAgency with USDC token at:", usdcTokenAddress);
+
   // Deploy MinTempAgency contract
   const minTempAgency = await deploy("MinTempAgency", {
     from: deployer,
-    args: [], // No constructor arguments needed
+    args: [usdcTokenAddress],
     log: true,
+    autoMine: true,
   });
 
   console.log(`✅ MinTempAgency deployed at: ${minTempAgency.address}`);
@@ -34,13 +42,15 @@ const deployMinTempAgency: DeployFunction = async function (hre: HardhatRuntimeE
     try {
       await hre.run("verify:verify", {
         address: minTempAgency.address,
-        constructorArguments: [],
+        constructorArguments: [usdcTokenAddress],
       });
       console.log("✅ Contract verified successfully!");
     } catch (error) {
       console.log("❌ Verification failed:", error);
       console.log("   You can verify manually later using:");
-      console.log(`   npx hardhat verify --network ${hre.network.name} ${minTempAgency.address}`);
+      console.log(
+        `   npx hardhat verify --network ${hre.network.name} ${minTempAgency.address} --constructor-args ${usdcTokenAddress}`,
+      );
     }
   }
 
@@ -64,6 +74,10 @@ const deployMinTempAgency: DeployFunction = async function (hre: HardhatRuntimeE
   console.log("2. Create temperature-based insurance policies");
   console.log("3. Claim policies as an insurer");
   console.log("4. Test policy resolution with real weather data\n");
+
+  // Get the deployed contract to interact with it after deploying.
+  const deployedMinTempAgency = await hre.ethers.getContract<Contract>("MinTempAgency", deployer);
+  console.log("👋 Initial greeting:", await deployedMinTempAgency.getAddress());
 };
 
 /**
@@ -83,3 +97,4 @@ export default deployMinTempAgency;
 // Tags are useful for selective deployment
 // e.g. yarn deploy --tags MinTempAgency
 deployMinTempAgency.tags = ["MinTempAgency", "WeatherInsurance", "Insurance"];
+deployMinTempAgency.dependencies = ["USDCToken"];

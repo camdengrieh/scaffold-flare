@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import {
   ChartBarIcon,
   CloudIcon,
-  Cog6ToothIcon,
   CurrencyDollarIcon,
   DocumentTextIcon,
   HomeIcon,
@@ -15,7 +14,6 @@ import {
 import {
   ChartBarIcon as ChartBarIconSolid,
   CloudIcon as CloudIconSolid,
-  Cog6ToothIcon as Cog6ToothIconSolid,
   CurrencyDollarIcon as CurrencyDollarIconSolid,
   DocumentTextIcon as DocumentTextIconSolid,
   HomeIcon as HomeIconSolid,
@@ -72,13 +70,6 @@ const navigation: NavigationItem[] = [
     icon: ChartBarIcon,
     iconSolid: ChartBarIconSolid,
     description: "Market insights and trends",
-  },
-  {
-    name: "Settings",
-    href: "/settings",
-    icon: Cog6ToothIcon,
-    iconSolid: Cog6ToothIconSolid,
-    description: "App preferences and settings",
   },
 ];
 

@@ -6,4 +6,5 @@ export * from "./BytesInput";
 export * from "./EtherInput";
 export * from "./InputBase";
 export * from "./IntegerInput";
+export * from "./USDCInput";
 export * from "./utils";
