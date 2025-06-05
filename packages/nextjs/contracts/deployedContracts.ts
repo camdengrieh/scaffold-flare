@@ -4,6 +4,956 @@
  */
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
-const deployedContracts = {} as const;
+const deployedContracts = {
+  114: {
+    MinTempAgency: {
+      address: "0x7486Fd7131Bad507dA5232DAa76e76adf45Fe888",
+      abi: [
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "PolicyClaimed",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "PolicyCreated",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "PolicyExpired",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "PolicyRetired",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "PolicySettled",
+          type: "event",
+        },
+        {
+          inputs: [
+            {
+              components: [
+                {
+                  internalType: "int256",
+                  name: "latitude",
+                  type: "int256",
+                },
+                {
+                  internalType: "int256",
+                  name: "longitude",
+                  type: "int256",
+                },
+                {
+                  internalType: "string",
+                  name: "description",
+                  type: "string",
+                },
+                {
+                  internalType: "int256",
+                  name: "temperature",
+                  type: "int256",
+                },
+                {
+                  internalType: "int256",
+                  name: "minTemp",
+                  type: "int256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "windSpeed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "windDeg",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct DataTransportObject",
+              name: "dto",
+              type: "tuple",
+            },
+          ],
+          name: "abiSignatureHack",
+          outputs: [],
+          stateMutability: "pure",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "claimPolicy",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "int256",
+              name: "latitude",
+              type: "int256",
+            },
+            {
+              internalType: "int256",
+              name: "longitude",
+              type: "int256",
+            },
+            {
+              internalType: "uint256",
+              name: "startTimestamp",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "expirationTimestamp",
+              type: "uint256",
+            },
+            {
+              internalType: "int256",
+              name: "minTempThreshold",
+              type: "int256",
+            },
+            {
+              internalType: "uint256",
+              name: "coverage",
+              type: "uint256",
+            },
+          ],
+          name: "createPolicy",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "expirePolicy",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getAllPolicies",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "address",
+                  name: "holder",
+                  type: "address",
+                },
+                {
+                  internalType: "int256",
+                  name: "latitude",
+                  type: "int256",
+                },
+                {
+                  internalType: "int256",
+                  name: "longitude",
+                  type: "int256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "startTimestamp",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "expirationTimestamp",
+                  type: "uint256",
+                },
+                {
+                  internalType: "int256",
+                  name: "minTempThreshold",
+                  type: "int256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "premium",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "coverage",
+                  type: "uint256",
+                },
+                {
+                  internalType: "enum MinTempAgency.PolicyStatus",
+                  name: "status",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct MinTempAgency.Policy[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "getInsurer",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "insurers",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "registeredPolicies",
+          outputs: [
+            {
+              internalType: "address",
+              name: "holder",
+              type: "address",
+            },
+            {
+              internalType: "int256",
+              name: "latitude",
+              type: "int256",
+            },
+            {
+              internalType: "int256",
+              name: "longitude",
+              type: "int256",
+            },
+            {
+              internalType: "uint256",
+              name: "startTimestamp",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "expirationTimestamp",
+              type: "uint256",
+            },
+            {
+              internalType: "int256",
+              name: "minTempThreshold",
+              type: "int256",
+            },
+            {
+              internalType: "uint256",
+              name: "premium",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "coverage",
+              type: "uint256",
+            },
+            {
+              internalType: "enum MinTempAgency.PolicyStatus",
+              name: "status",
+              type: "uint8",
+            },
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+            {
+              components: [
+                {
+                  internalType: "bytes32[]",
+                  name: "merkleProof",
+                  type: "bytes32[]",
+                },
+                {
+                  components: [
+                    {
+                      internalType: "bytes32",
+                      name: "attestationType",
+                      type: "bytes32",
+                    },
+                    {
+                      internalType: "bytes32",
+                      name: "sourceId",
+                      type: "bytes32",
+                    },
+                    {
+                      internalType: "uint64",
+                      name: "votingRound",
+                      type: "uint64",
+                    },
+                    {
+                      internalType: "uint64",
+                      name: "lowestUsedTimestamp",
+                      type: "uint64",
+                    },
+                    {
+                      components: [
+                        {
+                          internalType: "string",
+                          name: "url",
+                          type: "string",
+                        },
+                        {
+                          internalType: "string",
+                          name: "httpMethod",
+                          type: "string",
+                        },
+                        {
+                          internalType: "string",
+                          name: "headers",
+                          type: "string",
+                        },
+                        {
+                          internalType: "string",
+                          name: "queryParams",
+                          type: "string",
+                        },
+                        {
+                          internalType: "string",
+                          name: "body",
+                          type: "string",
+                        },
+                        {
+                          internalType: "string",
+                          name: "postProcessJq",
+                          type: "string",
+                        },
+                        {
+                          internalType: "string",
+                          name: "abiSignature",
+                          type: "string",
+                        },
+                      ],
+                      internalType: "struct IWeb2Json.RequestBody",
+                      name: "requestBody",
+                      type: "tuple",
+                    },
+                    {
+                      components: [
+                        {
+                          internalType: "bytes",
+                          name: "abiEncodedData",
+                          type: "bytes",
+                        },
+                      ],
+                      internalType: "struct IWeb2Json.ResponseBody",
+                      name: "responseBody",
+                      type: "tuple",
+                    },
+                  ],
+                  internalType: "struct IWeb2Json.Response",
+                  name: "data",
+                  type: "tuple",
+                },
+              ],
+              internalType: "struct IWeb2Json.Proof",
+              name: "proof",
+              type: "tuple",
+            },
+          ],
+          name: "resolvePolicy",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "retireUnclaimedPolicy",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+    WeatherIdAgency: {
+      address: "0xd722A0ea3Fe41D4635Dfa5c297765BDAb34Bb38F",
+      abi: [
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "PolicyClaimed",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "PolicyCreated",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "PolicyExpired",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "PolicyRetired",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "PolicySettled",
+          type: "event",
+        },
+        {
+          inputs: [
+            {
+              components: [
+                {
+                  internalType: "int256",
+                  name: "latitude",
+                  type: "int256",
+                },
+                {
+                  internalType: "int256",
+                  name: "longitude",
+                  type: "int256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "weatherId",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "weatherMain",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "description",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "temperature",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "windSpeed",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "windDeg",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct DataTransportObject",
+              name: "dto",
+              type: "tuple",
+            },
+          ],
+          name: "abiSignatureHack",
+          outputs: [],
+          stateMutability: "pure",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "claimPolicy",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "int256",
+              name: "latitude",
+              type: "int256",
+            },
+            {
+              internalType: "int256",
+              name: "longitude",
+              type: "int256",
+            },
+            {
+              internalType: "uint256",
+              name: "startTimestamp",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "expirationTimestamp",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "weatherIdThreshold",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "coverage",
+              type: "uint256",
+            },
+          ],
+          name: "createPolicy",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "expirePolicy",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getAllPolicies",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "address",
+                  name: "holder",
+                  type: "address",
+                },
+                {
+                  internalType: "int256",
+                  name: "latitude",
+                  type: "int256",
+                },
+                {
+                  internalType: "int256",
+                  name: "longitude",
+                  type: "int256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "startTimestamp",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "expirationTimestamp",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "weatherIdThreshold",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "premium",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "coverage",
+                  type: "uint256",
+                },
+                {
+                  internalType: "enum WeatherIdAgency.PolicyStatus",
+                  name: "status",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct WeatherIdAgency.Policy[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "getInsurer",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "insurers",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "registeredPolicies",
+          outputs: [
+            {
+              internalType: "address",
+              name: "holder",
+              type: "address",
+            },
+            {
+              internalType: "int256",
+              name: "latitude",
+              type: "int256",
+            },
+            {
+              internalType: "int256",
+              name: "longitude",
+              type: "int256",
+            },
+            {
+              internalType: "uint256",
+              name: "startTimestamp",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "expirationTimestamp",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "weatherIdThreshold",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "premium",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "coverage",
+              type: "uint256",
+            },
+            {
+              internalType: "enum WeatherIdAgency.PolicyStatus",
+              name: "status",
+              type: "uint8",
+            },
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+            {
+              components: [
+                {
+                  internalType: "bytes32[]",
+                  name: "merkleProof",
+                  type: "bytes32[]",
+                },
+                {
+                  components: [
+                    {
+                      internalType: "bytes32",
+                      name: "attestationType",
+                      type: "bytes32",
+                    },
+                    {
+                      internalType: "bytes32",
+                      name: "sourceId",
+                      type: "bytes32",
+                    },
+                    {
+                      internalType: "uint64",
+                      name: "votingRound",
+                      type: "uint64",
+                    },
+                    {
+                      internalType: "uint64",
+                      name: "lowestUsedTimestamp",
+                      type: "uint64",
+                    },
+                    {
+                      components: [
+                        {
+                          internalType: "string",
+                          name: "url",
+                          type: "string",
+                        },
+                        {
+                          internalType: "string",
+                          name: "httpMethod",
+                          type: "string",
+                        },
+                        {
+                          internalType: "string",
+                          name: "headers",
+                          type: "string",
+                        },
+                        {
+                          internalType: "string",
+                          name: "queryParams",
+                          type: "string",
+                        },
+                        {
+                          internalType: "string",
+                          name: "body",
+                          type: "string",
+                        },
+                        {
+                          internalType: "string",
+                          name: "postProcessJq",
+                          type: "string",
+                        },
+                        {
+                          internalType: "string",
+                          name: "abiSignature",
+                          type: "string",
+                        },
+                      ],
+                      internalType: "struct IWeb2Json.RequestBody",
+                      name: "requestBody",
+                      type: "tuple",
+                    },
+                    {
+                      components: [
+                        {
+                          internalType: "bytes",
+                          name: "abiEncodedData",
+                          type: "bytes",
+                        },
+                      ],
+                      internalType: "struct IWeb2Json.ResponseBody",
+                      name: "responseBody",
+                      type: "tuple",
+                    },
+                  ],
+                  internalType: "struct IWeb2Json.Response",
+                  name: "data",
+                  type: "tuple",
+                },
+              ],
+              internalType: "struct IWeb2Json.Proof",
+              name: "proof",
+              type: "tuple",
+            },
+          ],
+          name: "resolvePolicy",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "retireUnclaimedPolicy",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+  },
+} as const;
 
 export default deployedContracts satisfies GenericContractsDeclaration;

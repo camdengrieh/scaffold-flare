@@ -22,8 +22,6 @@ const deployWeatherIdAgency: DeployFunction = async function (hre: HardhatRuntim
     from: deployer,
     args: [], // No constructor arguments needed
     log: true,
-    autoMine: true, // Speed up deployment on local networks
-    waitConfirmations: hre.network.name === "hardhat" ? 1 : 2, // Wait for confirmations
   });
 
   console.log(`✅ WeatherIdAgency deployed at: ${weatherIdAgency.address}`);
