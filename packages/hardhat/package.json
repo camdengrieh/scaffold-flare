@@ -53,6 +53,7 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "@flarenetwork/flare-periphery-contracts": "^0.1.26",
     "@inquirer/password": "^4.0.2",
     "@openzeppelin/contracts": "^5.0.2",
     "@typechain/ethers-v6": "^0.5.1",
