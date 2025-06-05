@@ -7,6 +7,7 @@ import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import { useTheme } from "next-themes";
 import { Toaster } from "react-hot-toast";
 import { WagmiProvider } from "wagmi";
+import { WalkthroughProvider } from "~~/components/WeatherInsurance/Walkthrough";
 import { WeatherLayout } from "~~/components/WeatherInsurance/WeatherLayout";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
 import { useInitializeNativeCurrencyPrice } from "~~/hooks/scaffold-eth";
@@ -48,7 +49,9 @@ export const ScaffoldEthAppWithProviders = ({ children }: { children: React.Reac
           avatar={BlockieAvatar}
           theme={mounted ? (isDarkMode ? darkTheme() : lightTheme()) : lightTheme()}
         >
-          <ScaffoldEthApp>{children}</ScaffoldEthApp>
+          <WalkthroughProvider>
+            <ScaffoldEthApp>{children}</ScaffoldEthApp>
+          </WalkthroughProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { SideNavigation } from "./SideNavigation";
+import { WalkthroughPopup, WalkthroughTrigger } from "./Walkthrough";
 import { WeatherHeader } from "./WeatherHeader";
 
 interface WeatherLayoutProps {
@@ -34,6 +35,10 @@ export const WeatherLayout: React.FC<WeatherLayoutProps> = ({ children }) => {
           <div className="container mx-auto px-4 py-6 lg:px-6 lg:py-8">{children}</div>
         </main>
       </div>
+
+      {/* Walkthrough Components */}
+      <WalkthroughPopup />
+      <WalkthroughTrigger />
     </div>
   );
 };

@@ -72,7 +72,7 @@ const Dashboard: NextPage = () => {
         ? `${Number(policy.latitude) / 1_000_000}, ${Number(policy.longitude) / 1_000_000}`
         : "location"
     }`,
-    amount: `${formatEther(policy.coverage || 0n)} ETH`,
+    amount: `${formatEther(policy.coverage || 0n)} USDC`,
     time: "Recently",
     status: Number(policy.status) === 0 ? "pending" : Number(policy.status) === 1 ? "active" : "settled",
   }));
@@ -104,7 +104,9 @@ const Dashboard: NextPage = () => {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="mb-4 md:mb-0">
             <h1 className="text-3xl font-bold mb-2">Welcome to WeatherShield</h1>
-            <p className="text-primary-content/80 mb-4">Decentralized weather insurance powered by Flare Network</p>
+            <p className="text-primary-content/80 mb-4">
+              Demonstrating decentralised weather insurance powered by Flare Network
+            </p>
             {connectedAddress && (
               <div className="flex items-center space-x-2">
                 <span className="text-sm">Connected as:</span>
@@ -125,7 +127,7 @@ const Dashboard: NextPage = () => {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" data-testid="dashboard-stats">
         <div className="bg-base-100 rounded-xl p-6 border border-base-300">
           <div className="flex items-center justify-between">
             <div>
@@ -146,7 +148,7 @@ const Dashboard: NextPage = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-base-content/60 text-sm">Total Coverage</p>
-              <p className="text-2xl font-bold text-base-content">{stats.totalCoverage} ETH</p>
+              <p className="text-2xl font-bold text-base-content">{stats.totalCoverage} USDC</p>
             </div>
             <ShieldCheckIcon className="w-10 h-10 text-primary" />
           </div>
@@ -159,7 +161,7 @@ const Dashboard: NextPage = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-base-content/60 text-sm">Total Premiums</p>
-              <p className="text-2xl font-bold text-base-content">{stats.totalPremiums} ETH</p>
+              <p className="text-2xl font-bold text-base-content">{stats.totalPremiums} USDC</p>
             </div>
             <CurrencyDollarIcon className="w-10 h-10 text-primary" />
           </div>

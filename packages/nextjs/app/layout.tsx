@@ -5,7 +5,7 @@ import "~~/styles/globals.css";
 import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
 
 export const metadata = getMetadata({
-  title: "WeatherShield - Decentralized Weather Insurance",
+  title: "WeatherShield - Decentralised Weather Insurance",
   description: "Protect yourself against weather risks with blockchain-powered insurance on Flare Network",
 });
 

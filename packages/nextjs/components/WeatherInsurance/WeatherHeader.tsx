@@ -22,16 +22,13 @@ export const WeatherHeader: React.FC<WeatherHeaderProps> = ({ onMenuToggle }) =>
           <button onClick={onMenuToggle} className="lg:hidden btn btn-ghost btn-sm" aria-label="Open navigation menu">
             <Bars3Icon className="h-6 w-6" />
           </button>
-
-          <div className="hidden md:flex items-center space-x-2">
-            <div className="badge badge-outline badge-sm">{targetNetwork.name}</div>
-            {isLocalNetwork && <div className="badge badge-warning badge-sm">Local Network</div>}
-          </div>
         </div>
 
         {/* Right side - Wallet connection and faucet */}
         <div className="flex items-center space-x-3">
-          <RainbowKitCustomConnectButton />
+          <div data-testid="wallet-connect">
+            <RainbowKitCustomConnectButton />
+          </div>
           {isLocalNetwork && <FaucetButton />}
         </div>
       </div>

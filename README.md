@@ -6,7 +6,7 @@
   <a href="https://scaffoldeth.io">Scaffold-ETH Website</a>
 </h4>
 
-🌦️ A decentralized weather insurance platform built on the Flare network using Scaffold-ETH 2. This dApp enables users to create and trade weather-based insurance policies that automatically settle using real-world weather data through Flare's Web2Json oracle functionality.
+🌦️ A decentralised weather insurance platform built on the Flare network using Scaffold-ETH 2. This dApp enables users to create and trade weather-based insurance policies that automatically settle using real-world weather data through Flare's Web2Json oracle functionality.
 
 ⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, Typescript, and Flare Network's Web2Json oracles.
 
@@ -207,4 +207,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Built with ❤️ using [Scaffold-ETH 2](https://scaffoldeth.io) and [Flare Network](https://flare.network)
+Built with ❤️ using [Scaffold-ETH 2](https://scaffoldeth.io) and [Flare Network](https://flare.network) by Camden Grieh
