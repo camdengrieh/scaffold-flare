@@ -1,6 +1,7 @@
 "use client";
 
-import { Address, formatEther } from "viem";
+import { Address, formatEther, formatUnits } from "viem";
+import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { useDisplayUsdMode } from "~~/hooks/scaffold-eth/useDisplayUsdMode";
 import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
 import { useWatchBalance } from "~~/hooks/scaffold-eth/useWatchBalance";
@@ -10,12 +11,13 @@ type BalanceProps = {
   address?: Address;
   className?: string;
   usdMode?: boolean;
+  showUSDC?: boolean;
 };
 
 /**
- * Display (ETH & USD) balance of an ETH address.
+ * Display (ETH & USD) balance of an ETH address, with optional USDC balance.
  */
-export const Balance = ({ address, className = "", usdMode }: BalanceProps) => {
+export const Balance = ({ address, className = "", usdMode, showUSDC = true }: BalanceProps) => {
   const { targetNetwork } = useTargetNetwork();
   const nativeCurrencyPrice = useGlobalState(state => state.nativeCurrency.price);
   const isNativeCurrencyPriceFetching = useGlobalState(state => state.nativeCurrency.isFetching);
@@ -26,6 +28,13 @@ export const Balance = ({ address, className = "", usdMode }: BalanceProps) => {
     isLoading,
   } = useWatchBalance({
     address,
+  });
+
+  // Read USDC balance
+  const { data: usdcBalance } = useScaffoldReadContract({
+    contractName: "USDCToken",
+    functionName: "balanceOf",
+    args: [address],
   });
 
   const { displayUsdMode, toggleDisplayUsdMode } = useDisplayUsdMode({ defaultUsdMode: usdMode });
@@ -50,6 +59,7 @@ export const Balance = ({ address, className = "", usdMode }: BalanceProps) => {
   }
 
   const formattedBalance = balance ? Number(formatEther(balance.value)) : 0;
+  const formattedUSDCBalance = usdcBalance ? Number(formatUnits(usdcBalance, 6)) : 0;
 
   return (
     <button
@@ -70,6 +80,15 @@ export const Balance = ({ address, className = "", usdMode }: BalanceProps) => {
           </>
         )}
       </div>
+
+      {/* USDC Balance */}
+      {showUSDC && (
+        <div className="w-full flex items-center justify-center text-xs text-base-content/70 mt-1">
+          <span>💵</span>
+          <span className="ml-1">{formattedUSDCBalance.toFixed(2)}</span>
+          <span className="text-[0.7em] font-bold ml-1">USDC</span>
+        </div>
+      )}
     </button>
   );
 };
